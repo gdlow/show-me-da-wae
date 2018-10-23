@@ -98,17 +98,18 @@ extension ViewController: CLLocationManagerDelegate {
                 let longitude = placeDict.value(forKeyPath: "geometry.location.lng") as! CLLocationDegrees
                 let reference = placeDict.object(forKey: "reference") as! String
                 let name = placeDict.object(forKey: "name") as! String
-                let address = placeDict.object(forKey: "vicinity") as! String
-                
-                let location = CLLocation(latitude: latitude, longitude: longitude)
-                //4
-                let place = Place(location: location, reference: reference, name: name, address: address)
-                self.places.append(place)
-                //5
-                let annotation = PlaceAnnotation(location: place.location!.coordinate, title: place.placeName)
-                //6
-                DispatchQueue.main.async {
-                  self.mapView.addAnnotation(annotation)
+                if (placeDict.object(forKey: "vicinity") != nil) {
+                  let address = placeDict.object(forKey: "vicinity") as! String
+                  let location = CLLocation(latitude: latitude, longitude: longitude)
+                  //4
+                  let place = Place(location: location, reference: reference, name: name, address: address)
+                  self.places.append(place)
+                  //5
+                  let annotation = PlaceAnnotation(location: place.location!.coordinate, title: place.placeName)
+                  //6
+                  DispatchQueue.main.async {
+                    self.mapView.addAnnotation(annotation)
+                  }
                 }
               }
             }

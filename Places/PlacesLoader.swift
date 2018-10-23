@@ -26,7 +26,7 @@ import CoreLocation
 struct PlacesLoader {  
   let apiURL = "https://maps.googleapis.com/maps/api/place/"
   // TODO: Remove hard coded API key access!
-  let apiKey = "insert your api key here"
+  let apiKey = 
   
   func loadPOIS(location: CLLocation, radius: Int = 30, handler: @escaping (NSDictionary?, NSError?) -> Void) {
     print("Load pois")
